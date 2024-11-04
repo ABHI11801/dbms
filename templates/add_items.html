@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items to {{ tableno }}</title>
+</head>
+<body>
+    <h1>Add Items to {{ tableno.replace('table', 'Table ') }}</h1>
+    <form action="{{ url_for('add_items', tableno=tableno) }}" method="post">
+        {% for item in items %}
+            <div>
+                <input type="checkbox" name="item_ids" value="{{ item[0] }}"> {{ item[1] }} - ${{ item[2] }}
+            </div>
+        {% endfor %}
+        <button type="submit">Add Selected Items</button>
+    </form>
+    <br>
+    <form action="{{ url_for('generate_bill', tableno=tableno) }}" method="get">
+        <button type="submit">Generate Bill</button>
+    </form>
+</body>
+</html>

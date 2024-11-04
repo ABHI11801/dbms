@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinez - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('menu') }}">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+    </div>
+
+    <div class="spacer"></div>
+    <div class="card-container">
+        {% for table, status in table_statuses.items() %}
+            <a href="{{ url_for('add_items', tableno=table) }}" class="card">
+                <div class="card {% if status == 0 %}green{% elif status == 1 %}orange{% elif status == 2 %}yellow{% endif %}" id="{{ table }}">
+                    <h2>{{ table.replace('table', 'Table ') }}</h2>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

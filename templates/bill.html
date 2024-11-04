@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill for {{ tableno }}</title>
+</head>
+<body>
+    <h1>Bill for {{ tableno.replace('table', 'Table ') }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Total: ${{ total }}</h2>
+    <form action="{{ url_for('bill_paid', tableno=tableno) }}" method="post">
+        <button type="submit">Bill Paid</button>
+    </form>
+</body>
+</html>
