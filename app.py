@@ -1,8 +1,9 @@
-from flask import Flask, render_template, g, url_for, request, redirect
+from flask import Flask, render_template, g, url_for, request, redirect, session, flash
 import sqlite3
 import os
 
 app = Flask(__name__)
+app.secret_key = 'killerbean11801'
 DATABASE = os.path.join(os.path.dirname(__file__), 'data.db')
 
 def get_db():
@@ -19,7 +20,58 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-@app.route('/')
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    """Signup page to register a new user."""
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Check if user already exists
+        cursor = get_db().cursor()
+        cursor.execute("SELECT * FROM login WHERE username = ?", (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            flash("Username already exists. Please choose another one.", "warning")
+        else:
+            # Insert new user
+            cursor.execute("INSERT INTO login (username, password) VALUES (?, ?)", (username, password))
+            get_db().commit()
+            flash("Signup successful! Please log in.", "success")
+            return redirect(url_for('login'))
+    
+    return render_template('signup.html')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    """Login page to authenticate users."""
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        cursor = get_db().cursor()
+        cursor.execute("SELECT * FROM login WHERE username = ? AND password = ?", (username, password))
+        user = cursor.fetchone()
+
+        if user:
+            session['username'] = username  # Store username in session
+            flash("Login successful!", "success")
+            return redirect(url_for('index'))  # Redirect to index after login
+        else:
+            flash("Invalid username or password.", "danger")
+
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    """Clear the session and redirect to the login page."""
+    session.clear()
+    flash("You have been logged out.", "info")
+    return redirect(url_for('login'))
+
+@app.route('/index')
 def index():
     """Render the index page with table statuses."""
     cursor = get_db().cursor()
