@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+    <link rel="stylesheet" href="/static/signup_styles.css">
 </head>
 <body>
-    <h2>Signup</h2>
-    <form action="{{ url_for('signup') }}" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
+    <div class="container">
+        <h2>Signup</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+            </div>
         
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
+            </div>
         
-        <button type="submit">Sign Up</button>
-    </form>
+            <button type="submit">Sign Up</button>
+        </form>
     <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+    </div>
 </body>
 </html>

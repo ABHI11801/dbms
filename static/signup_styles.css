@@ -1,0 +1,134 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5D4037;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(150, 90, 60, 0.1);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.container::before {
+    content: '🍔';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+}
+
+h2 {
+    text-align: center;
+    color: #FF6F00;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #8D6E63;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #FFE0B2;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #FF6F00;
+    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+}
+
+button {
+    background: #FF6F00;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background: #F57C00;
+    transform: translateY(-2px);
+}
+
+button::before {
+    content: '🍳';
+    margin-right: 8px;
+}
+
+p {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #8D6E63;
+}
+
+a {
+    color: #FF6F00;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #F57C00;
+    text-decoration: underline;
+}
+
+/* Food animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.container::after {
+    content: '🍕';
+    position: absolute;
+    bottom: -30px;
+    right: -20px;
+    font-size: 30px;
+    animation: float 3s ease-in-out infinite;
+}
