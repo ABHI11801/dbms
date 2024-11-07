@@ -8,11 +8,12 @@
 </head>
 <body>
     <div class="navbar">
+        <h2 class="dinez">DINEZ</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('menu') }}">Menu</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="javascript:void(0);" id="upcomers">Upcomers</a></li>
+
 
             {% if session.get('username') %}
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -32,5 +33,58 @@
             </a>
         {% endfor %}
     </div>
+    <div class="spacer"></div>
+    <div class="dishes-section">
+        <h2>Newly Introduced Dishes</h2>
+        <div class="dishes-container">
+            <div class="dish-card">
+                <img src="/static/img2.jpg" alt="Dish 1">
+                <h3>Grilled Salmon with Lemon Butter</h3>
+                <p>Succulent salmon fillet grilled to perfection and topped with a delectable lemon butter sauce.</p>
+            </div>
+            <div class="dish-card">
+                <img src="/static/img3.jpeg" alt="Dish 2">
+                <h3>Crispy Fried Calamari</h3>
+                <p>Tender calamari rings coated in a light and crispy batter, served with a zesty lemon-garlic aioli.</p>
+            </div>
+            <div class="dish-card">
+                <img src="/static/img4.jpeg" alt="Dish 3">
+                <h3>Beef Bourguignon</h3>
+                <p>Slow-braised beef in a rich red wine sauce, accompanied by roasted potatoes and sautéed vegetables.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("upcomers").addEventListener("click", function() {
+                const targetSection = document.getElementById("dishes-section");
+    
+                if (window.jQuery) {
+                    $('html, body').animate({ scrollTop: $(targetSection).offset().top }, 800);
+                } else if ('scrollIntoView' in targetSection) {
+                    targetSection.scrollIntoView({ behavior: "smooth" });
+                } else {
+                    let targetY = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    let startY = window.pageYOffset;
+                    let distance = targetY - startY;
+                    let duration = 800;
+                    let startTime = null;
+    
+                    function smoothScroll(currentTime) {
+                        if (!startTime) startTime = currentTime;
+                        let timeElapsed = currentTime - startTime;
+                        let progress = Math.min(timeElapsed / duration, 1);
+                        window.scrollTo(0, startY + distance * progress);
+                        if (timeElapsed < duration) requestAnimationFrame(smoothScroll);
+                    }
+                    requestAnimationFrame(smoothScroll);
+                }
+            });
+        });
+    </script>
+    
+       
+    
 </body>
 </html>

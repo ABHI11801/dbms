@@ -7,38 +7,11 @@ body {
     color: #5D4037;
 }
 
-.menu-container {
-    background: white;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(150, 90, 60, 0.1);
-    position: relative;
-}
-
-.menu-container::before,
-.menu-container::after {
-    content: '🍽️';
-    position: absolute;
-    top: -20px;
-    font-size: 2rem;
-}
-
-.menu-container::before {
-    left: 20px;
-}
-
-.menu-container::after {
-    right: 20px;
-    transform: scaleX(-1);
-}
-
 h1 {
     text-align: center;
     color: #FF6F00;
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -59,7 +32,7 @@ table {
     border-collapse: collapse;
     margin-top: 2rem;
     background: white;
-    box-shadow: 0 4px 16px rgba(150, 90, 60, 0.05);
+    box-shadow: 0 4px 16px rgba(150, 90, 60, 0.1);
 }
 
 th {
@@ -106,12 +79,36 @@ td:last-child {
     width: 100px;
 }
 
+h2 {
+    text-align: center;
+    color: #FF6F00;
+    font-size: 2rem;
+    margin-top: 2rem;
+    font-weight: 600;
+}
+
+form {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+button[type="submit"] {
+    background-color: #FF6F00;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #E65100;
+}
+
 @media (max-width: 600px) {
     body {
-        padding: 1rem;
-    }
-
-    .menu-container {
         padding: 1rem;
     }
 
@@ -123,45 +120,17 @@ td:last-child {
     th {
         padding: 0.8rem;
     }
-}
 
-@keyframes float {
-    0% {
-        transform: translateY(0) rotate(0);
+    h1 {
+        font-size: 2rem;
     }
 
-    50% {
-        transform: translateY(-10px) rotate(5deg);
+    h2 {
+        font-size: 1.5rem;
     }
 
-    100% {
-        transform: translateY(0) rotate(0);
+    button[type="submit"] {
+        padding: 0.6rem 1.8rem;
+        font-size: 1rem;
     }
-}
-
-.floating-food {
-    position: fixed;
-    font-size: 2rem;
-    pointer-events: none;
-    animation: float 3s ease-in-out infinite;
-}
-
-.floating-food:nth-child(1) {
-    top: 20px;
-    left: 20px;
-    content: '🥗';
-}
-
-.floating-food:nth-child(2) {
-    top: 60px;
-    right: 40px;
-    content: '🍕';
-    animation-delay: -1s;
-}
-
-.floating-food:nth-child(3) {
-    bottom: 40px;
-    left: 40px;
-    content: '🍔';
-    animation-delay: -2s;
 }
